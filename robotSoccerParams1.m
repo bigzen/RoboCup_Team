@@ -1,9 +1,3 @@
-% Initialization script for Soccer Simulation example
-% Copyright 2019 The MathWorks, Inc.
-
-%% Load bus data types
-clear
-load soccerBusTypes;
 
 %% Soccer field parameters
 % X and Y limits for the field
@@ -43,9 +37,7 @@ initialPoses = [2.0 2.0 0.0;
 initBallPos = fieldCenter;
 
 % Initial Game State
-initGameState = struct('possession',0, ...
-                       'state',GameState.InPlay, ...
-                       'score',[0;0]);
+%initGameState = struct('possession',0, ...                       'state',GameState.InPlay, ...                       'score',[0;0]);
                    
 % Ball kicking noise (multiplying factor for 'randn' function)
 ballVelNoise = 0.5;
@@ -56,7 +48,7 @@ ballCarryFactor = 0.9;          % Speed penalty when carrying the ball
 outOfBoundsDist = 2;            % Distance to place ball back in bounds
 
 % Randomize initial conditions
-randomizeStartingPositions;
+%randomizeStartingPositions;
 
 %% Object Detector and Robot Detector sensor parameters
 objDetectorOffset = [0 0];
@@ -137,7 +129,7 @@ minneckang = -90;
 minneckmoment = -180;
 minpower = -100;
 offside_active_area_size = 2.5;
- = ;
+
 offside_kick_margin = 9.15;
 offside_kick_margin = 9.15;
 pen_dist_x = 42.5;
@@ -160,4 +152,5 @@ tackle_power_rate = 0.027;
 tackle_rand_factor = 2;
 tackle_width = 1.25;
 visible_angle = 90;
+
 
