@@ -1,8 +1,7 @@
-function idx = plotSoccerField()
+function plotSoccerField(idx)
     %function to plot soccer field
     %number to one
-    idx = 1;
-    figure(idx);
+    figure(idx)
     hold on
     % Title
     title('Robot Soccer Simulation');
