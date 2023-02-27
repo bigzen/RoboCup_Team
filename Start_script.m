@@ -13,7 +13,7 @@ gameState.players(4).pos = [4.5-0.45*cosd(45),3-0.45*sind(45)];
 %% Loop the game
 while(gameState.time<600)
     visualizeGameState(gameState)
-    flag = checkFoul(gameState);
+    flag = checkFoul(gameState.ball.position);
     if flag~=0
         gameState = initFoulState(gameState,flag);
     else
