@@ -1,7 +1,13 @@
-function [outputArg1,outputArg2] = initFoulState(inputArg1,inputArg2)
-%INITFOULSTATE Summary of this function goes here
-%   Detailed explanation goes here
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
+function gameState = initFoulState(gameState,flag)
+    advteam= Adv_team(gameState);
+    if flag == GameFlag.outOfPlay
+        gameState = ThrowIn(gameState,advteam) ;
+    elseif flag == GameFlag.goalKick
+        gameState = GoalKick(gameState,advteam) ;
+    elseif flag == GameFlag.goalScore
+        gameState = KickOff(gameState,advteam);
+    elseif flag == GameFlag.corner
+        gameState = CornerKick(gameState,advteam);
+    end
 end
 

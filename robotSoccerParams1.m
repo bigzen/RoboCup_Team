@@ -17,10 +17,10 @@ fieldLimitsY = [0 6];
 %map = robotics.OccupancyGrid(zeros(fieldLimitsY(2),fieldLimitsX(2)));
 
 % Goal Post Parameters (X, Y, Object Index)
-goalPosts = [ 0 2.715 2; 
-              0 1.985 2; 
-             9 2.715 3; 
-             9 1.985 3];
+goalPosts = [ 0 4.3 2; 
+              0 1.7 2; 
+             9 4.3 3; 
+             9 1.7 3];
 fieldCenter = [mean(fieldLimitsX) mean(fieldLimitsY)];
 homeGoalPosition = [fieldLimitsX(1) mean(fieldLimitsY)];
 awayGoalPosition = [fieldLimitsX(2) mean(fieldLimitsY)];

@@ -3,6 +3,7 @@ classdef GameFlag < Simulink.IntEnumType
       normalPlay(0)
       goalScore(1)
       corner(2)
-      outOfPlay(3)
+      goalKick(3)
+      outOfPlay(4)
    end
 end
