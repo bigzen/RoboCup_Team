@@ -13,6 +13,6 @@ plotSoccerField.m
 plotPlayers.m  
 plotBall.m
 
-working hours:
-qqt: 8h
-sun: 9h
+working hours:  
+qqt: 8h  
+sun: 9.5h
