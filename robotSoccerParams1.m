@@ -1,3 +1,12 @@
+%<<<<<<< HEAD
+% Initialization script for Soccer Simulation example
+% Copyright 2019 The MathWorks, Inc.
+
+%% Load bus data types
+clear
+%load soccerBusTypes;
+%=======
+%>>>>>>> 01bda8825cae68d27f2e28787c6851ea16cbc722
 
 %% Soccer field parameters
 % X and Y limits for the field
@@ -5,7 +14,7 @@ fieldLimitsX = [0 9];
 fieldLimitsY = [0 6];
 
 % Define the field as an Occupancy Map
-map = robotics.OccupancyGrid(zeros(fieldLimitsY(2),fieldLimitsX(2)));
+%map = robotics.OccupancyGrid(zeros(fieldLimitsY(2),fieldLimitsX(2)));
 
 % Goal Post Parameters (X, Y, Object Index)
 goalPosts = [ 0 2.715 2; 
@@ -21,31 +30,41 @@ sampleTime = 0.1;
 
 % Robot definitions and dimensions
 numRobots = 8;
-robotRadius = 0.6;
+robotRadius = 0.3;
 wheelRadius = 0.2;
-robotColors = [1 0 0;0 0 1;1 0 0;0 0 1;1 0 0;0 0 1;1 0 0;0 0 1];
+robotColors = ['r';'r';'r';'r';'b';'b';'b';'b'];
 
 % Initial Robot poses (X, Y, Theta)
-initialPoses = [2.0 2.0 0.0;
-                8.0 3.0 pi;
-                3.2 2.9 0.0;
-                6.2 1.3 pi; 
-                3.2 1.8 0.0;
-                6.2 2.6 pi];
+initialPoses = [0.5 3;
+           1.9 3;
+           3.5 4;
+           3.3 2;
+           5.7 4;
+           5.7 2; 
+           7.1 3;
+           8.5 3];
+% initial robot role: 0:goal keeper, 1: defender, 2:attacker
+initRoles = [0,1,1,2,2,1,1,0];
 
 % Initial Ball Position
 initBallPos = fieldCenter;
 
 % Initial Game State
+%<<<<<<< HEAD
+%initGameState = struct('possession',0, ...
+%                       'state',GameState.InPlay, ...
+%                       'score',[0;0]);
+%=======
 %initGameState = struct('possession',0, ...                       'state',GameState.InPlay, ...                       'score',[0;0]);
+%>>>>>>> 01bda8825cae68d27f2e28787c6851ea16cbc722
                    
 % Ball kicking noise (multiplying factor for 'randn' function)
 ballVelNoise = 0.5;
 ballAngleNoise = pi/24;
 
 ballThresh = robotRadius + 0.3; % Distance to grab the ball
-ballCarryFactor = 0.9;          % Speed penalty when carrying the ball
-outOfBoundsDist = 2;            % Distance to place ball back in bounds
+ballCarryFactor = 0.94;          % Speed penalty when carrying the ball
+outOfBoundsDist = 3;            % Distance to place ball back in bounds
 
 % Randomize initial conditions
 %randomizeStartingPositions;
@@ -86,8 +105,8 @@ defenderAwayPoses = [7.2 2.85 pi;
 defenderKickSpeed = 5;              % Kick speed for defending
 
 % Goalkeeper parameters
-goalkeeperPoses = [ 2.0 2.35 0;
-                   9.0 2.35 pi]';    % Goalkeeper poses for home and away teams
+goalkeeperPoses = [ 0.0 3.0 0;
+                   9.0 3.0 pi]';    % Goalkeeper poses for home and away teams
 goalkeeperKickSpeed = 10;           % Kick speed for goalkeeping
 
 
@@ -104,11 +123,8 @@ pen_nr_kicks = 5;
 start_goal_l = 0;
 start_goal_r = 0;
 ball_accel_max = 2.7;
-ball_decay = 0.94;
-ball_rand = 0.05;
 ball_size = 0.085;
 ball_speed_max = 3;
-ball_stuck_area = 3;
 ball_weight = 0.2;
 inertia_moment = 5;
 kick_power_rate = 0.027;
@@ -129,15 +145,16 @@ minneckang = -90;
 minneckmoment = -180;
 minpower = -100;
 offside_active_area_size = 2.5;
+%<<<<<<< HEAD
+%=======
 
-offside_kick_margin = 9.15;
+%>>>>>>> 01bda8825cae68d27f2e28787c6851ea16cbc722
 offside_kick_margin = 9.15;
 pen_dist_x = 42.5;
 pen_max_goalie_dist_x = 14;
 player_accel_max = 1;
 player_decay = 0.4;
 player_rand = 0.1;
-player_size = 0.3;
 player_speed_max = 1.05;
 player_speed_max_min = 0.75;
 player_weight = 60;
