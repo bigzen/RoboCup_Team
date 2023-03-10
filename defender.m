@@ -20,9 +20,9 @@ function [ball_speed, player_acceleration] = defender(ball,players,id)
     goalThresh = 2;
     
     %% speed of the ball
-    ball_speed=ball.vel;
-    ball_speed_x=ball_speed(1);
-    ball_speed_y=ball_speed(2);
+    %ball_speed=ball.vel;
+    ball_speed_x=0;
+    ball_speed_y=0;
     
     %% determind teamates and opponents
     if id <= 4

@@ -28,9 +28,9 @@ function [ball_speed, player_acceleration] = attacker(ball,players,id)
     %设定球运动速度
     %speed of the ball
 
-    ball_speed=ball.vel;
-    ball_speed_x=ball_speed(1);
-    ball_speed_y=ball_speed(2);
+    %ball_speed=ball.vel;
+    ball_speed_x=0;
+    ball_speed_y=0;
     
     
     % 设定一个循环，不断更新球员的位置，直到球员到达球的位置
