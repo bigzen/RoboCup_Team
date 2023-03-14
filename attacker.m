@@ -23,7 +23,7 @@ function [ball_speed, player_acceleration] = attacker(ball,players,id)
     
     % 设定控制器的误差容忍度
     %set Controller error tolerance
-    tolerance = 0.1;
+    tolerance = 0.45;
     
     %设定球运动速度
     %speed of the ball

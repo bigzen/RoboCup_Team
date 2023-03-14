@@ -13,7 +13,7 @@ function [ball_speed, player_acceleration] = defender(ball,players,id)
     %% parametres
     kp = 20;    % Porpational param
     kd = 1;     % Differential param
-    tolerance = 0.1;    %set Controller error tolerance
+    tolerance = 0.45;    %set Controller error tolerance
     dribbleKickForce = 2;               % Kick force for dribbling
     shootKickForce = 7;                 % Kick force for shooting
     defenderKickForce = 7;              % Kick force for defending
