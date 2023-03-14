@@ -21,7 +21,9 @@ function gameState = GoalKick(gameState,advteam)
       gameState.ball.position = [1.5 3];
       gameState.players(1).pos = [1 3];
       gameState.players(8).pos = [8.5,3];
+      gameState.players(1).vel = [0,0];
       for idx = 2:8
+          gameState.players(idx).vel = [0,0];
           gameState.players(idx).dir = pi;
       end
 
@@ -48,7 +50,9 @@ function gameState = GoalKick(gameState,advteam)
       gameState.ball.position = [7.5 3];
       gameState.players(1).pos = [0.5,3];
       gameState.players(8).pos = [8 3];
+      gameState.players(8).vel = [0,0];
       for idx = 1:7
+          gameState.players(idx).vel = [0,0];
           gameState.players(idx).dir = 0;
       end
   end

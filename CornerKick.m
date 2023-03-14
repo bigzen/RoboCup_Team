@@ -23,6 +23,7 @@ function gameState = CornerKick(gameState,advteam)
             end
         end
         for idx = 1:8
+            gameState.players(idx).vel = [0,0];
             if idx ~= thruplayeridx
                 gameState.players(idx).dir = 0.5*pi;
             end
@@ -52,6 +53,7 @@ function gameState = CornerKick(gameState,advteam)
             end
         end        
         for idx = 1:8
+            gameState.players(idx).vel = [0,0];
             if idx ~= thruplayeridx
                 gameState.players(idx).dir = -0.5*pi;
             end 
@@ -87,6 +89,7 @@ function gameState = CornerKick(gameState,advteam)
             end
         end        
         for idx = 1:8
+            gameState.players(idx).vel = [0,0];
             if idx ~= thruplayeridx
                 gameState.players(idx).dir = 0.5*pi;
             end 
@@ -115,6 +118,7 @@ function gameState = CornerKick(gameState,advteam)
             end
         end               
         for idx = 1:8
+            gameState.players(idx).vel = [0,0];
             if idx ~= thruplayeridx
                 gameState.players(idx).dir = -0.5*pi;
             end 

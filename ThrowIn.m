@@ -30,4 +30,9 @@ function gameState = ThrowIn(gameState,advteam)
         elseif (gameState.ball.position(1) > 4.5 && gameState.ball.position(1) <9) && gameState.ball.position(2) <= 6
             gameState.players(thruplayeridx).pos = [gameState.ball.position(1)+0.45*cosd(45) gameState.ball.position(2)+0.45*sind(45)];
         end
+        
     end
+    for idx = 1:8 
+        gameState.players(idx).vel = [0,0];
+    end
+end
