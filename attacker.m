@@ -1,8 +1,8 @@
 function [ball_speed, player_acceleration] = attacker(ball,players,id)
 
     % Assume the position of the ball is (ball_x, ball_y)
-    ball_x = ball.pos(1);
-    ball_y = ball.pos(2);
+    ball_x = ball.position(1);
+    ball_y = ball.position(2);
     distance_to_ball=0;   
     
     % 假设球员初始位置是(player_x, player_y)
@@ -41,7 +41,7 @@ function [ball_speed, player_acceleration] = attacker(ball,players,id)
     prev_distance_to_ball=distance_to_ball;
     distance_to_ball = [player_x - ball_x, player_y - ball_y];
     angle_to_ball = atan2(ball_y - player_y, ball_x - player_x);
-
+    player_acceleration = [0,0];
 
     
 

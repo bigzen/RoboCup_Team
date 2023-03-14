@@ -1,9 +1,10 @@
 function [ball_speed_x,ball_speed_y] = KickBall(ball, kickForce, targetPosition)
+load('robotSoccerParam','ball_weight')
 angularNoise = 0.3;
 kickBallNoise = 0.3;
 ballFrictionForce = -0.1;
-dt = 0.5;
-ballPosition = ball.pos;
+ball_contact_time = 0.05;
+ballPosition = ball.position;
 % updatedBall = ball;
 
 %caculate the force with kickBallNoise
@@ -15,9 +16,8 @@ kickDirection(1) = kickDirection(1) + normrnd(0, angularNoise);
 kickDirection(2) = kickDirection(2) + normrnd(0, angularNoise);
 kickDirection = kickDirection / norm(kickDirection);
 
-ball.acc= ball.acc + kickBallForce*kickDirection;
-ball.vel = ball.vel + ball.acc * dt;
-ball_speed_x = ball.vel(1);
-ball_speed_y = ball.vel(2);
+speed = ball.velocity+ball_contact_time*kickBallForce*kickDirection/ball_weight;
+ball_speed_x = speed(1);
+ball_speed_y = speed(2);
 
 end

@@ -1,7 +1,7 @@
 function [ball_speed, player_acceleration] = goal_keeper(ball,players,id)
     %% Assume the position of the ball is (ball_x, ball_y)
-    ball_x = ball.pos(1);
-    ball_y = ball.pos(2);
+    ball_x = ball.position(1);
+    ball_y = ball.position(2);
     distance_to_ball=0;   
     
     %% Assume the position of the player is (player_x, player_y)
@@ -49,9 +49,9 @@ function [ball_speed, player_acceleration] = goal_keeper(ball,players,id)
     distance_to_ball = [player_x - ball_x, player_y - ball_y];
     angle_to_ball = atan2(ball_y - player_y, ball_x - player_x);
     distToGoal = norm(players(id).pos - goalPosition);         % Distance to goal
-    ballDistToOwnGoal = norm(ball.pos - ownGoalPosition);          % Distance between ball and own goal
-    distToBall = norm(ball.pos - players(id).pos); 
-
+    ballDistToOwnGoal = norm(ball.position - ownGoalPosition);          % Distance between ball and own goal
+    distToBall = norm(ball.position - players(id).pos); 
+    player_acceleration = [0,0];
 
     %% defender behavior
     if ballDistToOwnGoal < 3

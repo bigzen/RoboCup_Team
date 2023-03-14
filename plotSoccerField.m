@@ -1,8 +1,9 @@
-function plotSoccerField(idx)
+function plotSoccerField(gameState)
     %function to plot soccer field
     %number to one
-    figure(idx)
+    %figure(gameState.time)
     hold on
+    %% plot field
     % Title
     title('Robot Soccer Simulation');
     % color the field
@@ -41,5 +42,19 @@ function plotSoccerField(idx)
     axis equal
     xlim([-1 10]);
     ylim([-1 7]);
+
+    %% plot players
+    r = 0.31;
+    color = ['r','b'];
+    players = gameState.players;
+    for idx = 1:8
+        %[players(idx).pos(1)-r, players(idx).pos(2)-r];
+        rectangle('Position',[players(idx).pos(1)-r, players(idx).pos(2)-r, 2*r, 2*r],'Curvature', [1,1], 'FaceColor',color(players(idx).team+1))
+    end
+    %% plot ball
+    r = 0.143;
+    pos = gameState.ball.position;
+    rectangle('Position',[pos(1)-r, pos(2)-r, 2*r, 2*r],'Curvature', [1,1], 'FaceColor','w')
     hold off
+
 end
