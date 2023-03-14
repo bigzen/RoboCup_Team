@@ -5,7 +5,7 @@ function plotSoccerField(gameState)
     hold on
     %% plot field
     % Title
-    title('Robot Soccer Simulation');
+    title('Robot Soccer Simulation ');
     % color the field
     rectangle('Position', [-1 -1 11 8],'LineWidth', 0.125,'FaceColor',"#003518");
     % Draw outer boundary
@@ -50,6 +50,10 @@ function plotSoccerField(gameState)
     for idx = 1:8
         %[players(idx).pos(1)-r, players(idx).pos(2)-r];
         rectangle('Position',[players(idx).pos(1)-r, players(idx).pos(2)-r, 2*r, 2*r],'Curvature', [1,1], 'FaceColor',color(players(idx).team+1))
+        if norm(players(idx).vel)>0
+            dir = players(idx).vel/norm(players(idx).vel);
+            plot([players(idx).pos(1),players(idx).pos(1)+dir(1)*0.31],[players(idx).pos(2), players(idx).pos(2)+dir(2)*0.31],'LineWidth', 0.3,'Color','white');
+        end
     end
     %% plot ball
     r = 0.143;
