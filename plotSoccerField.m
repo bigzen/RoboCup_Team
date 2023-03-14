@@ -5,7 +5,7 @@ function plotSoccerField(gameState)
     hold on
     %% plot field
     % Title
-    title('Robot Soccer Simulation ');
+    title("Robot Soccer Simulation "+ num2str(gameState.score.a)+" - "+ num2str(gameState.score.b));
     % color the field
     rectangle('Position', [-1 -1 11 8],'LineWidth', 0.125,'FaceColor',"#003518");
     % Draw outer boundary
