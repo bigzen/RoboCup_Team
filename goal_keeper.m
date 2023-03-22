@@ -1,15 +1,4 @@
-function [ball_speed, player_acceleration] = goal_keeper(ball,players,id)
-    %% Assume the position of the ball is (ball_x, ball_y)
-    ball_x = ball.position(1);
-    ball_y = ball.position(2);
-    distance_to_ball=0;   
-    
-    %% Assume the position of the player is (player_x, player_y)
-    player = players(id);
-    player_x = player.pos(1);
-    player_y = player.pos(2);
-    player_speed = player.vel;
-    
+function [ball_speed, player_acceleration] = goal_keeper(ball,players,id)    
     %% parametres
     kp = 20;    % Porpational param
     kd = 1;     % Differential param
@@ -45,53 +34,20 @@ function [ball_speed, player_acceleration] = goal_keeper(ball,players,id)
         goalPosition = [0 3];
     end
     %% caculate the distance and angle
-    prev_distance_to_ball=distance_to_ball;
-    distance_to_ball = [player_x - ball_x, player_y - ball_y];
-    angle_to_ball = atan2(ball_y - player_y, ball_x - player_x);
     distToGoal = norm(players(id).pos - goalPosition);         % Distance to goal
     ballDistToOwnGoal = norm(ball.position - ownGoalPosition);          % Distance between ball and own goal
-    distToBall = norm(ball.position - players(id).pos); 
     player_acceleration = [0,0];
 
     %% defender behavior
     if ballDistToOwnGoal < 3
         if distToGoal > goalThresh
             desire_position = ownGoalPosition;
-            distance_to_dpos = [player_x - desire_position(1), player_y - desire_position(2)];
-            [player_acceleration]=PD_Controller(player_x,player_y,player_speed,kp,kd,distance_to_dpos,prev_distance_to_ball);
+            [player_acceleration]=PD_Controller_new(kp,kd,desire_position, desire_position,players(id).pos, players(id).prev_pos);
         else
             [ball_speed_x,ball_speed_y] = KickBall(ball, goalkeeperKickForce, goalPosition);
         end
     else
         desire_position = ownGoalPosition;
-        distance_to_dpos = [player_x - desire_position(1), player_y - desire_position(2)];
-        [player_acceleration]=PD_Controller(player_x,player_y,player_speed,kp,kd,distance_to_dpos,prev_distance_to_ball);
+        [player_acceleration]=PD_Controller_new(kp,kd,desire_position, desire_position,players(id).pos, players(id).prev_pos);
     end
     ball_speed = [ball_speed_x, ball_speed_y];
-
-    %pause(0);
-
-    %% update the ball
-    
-   % ball_x = ball_x+ball_speed_x*0.5;
-    %ball_y = ball_y+ball_speed_y*0.5;  
-   % ball_speed_x=0.3*ball_speed_x;
-   % ball_speed_y=0.3*ball_speed_y;
-    %% visulization
-   % ball.pos(1) = ball_x;
-   % ball.pos(2) = ball_y;
-    
-   % player.pos(1) = player_x;
-   % player.pos(2) = player_y;
-    %players(id) = player;
-    %r = 0.2;
-
-    %ball.vel(1) = ball_speed_x;
-    %ball.vel(2) = ball_speed_y;
-    %player.vel = player_speed;
-    %player.acc = player_acceleration;
-    
-%     rectangle('Position',[player.pos(1)-r, player.pos(2)-r, 2*r, 2*r],'Curvature', [1,1], 'FaceColor',player.color)
-%     rectangle('Position',[ball.pos(1)-0.143, ball.pos(2)-0.143, 2*0.143, 2*0.143],'Curvature', [1,1], 'FaceColor','w')
-
-
