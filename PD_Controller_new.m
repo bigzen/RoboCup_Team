@@ -5,12 +5,12 @@ function [player_acceleration]=PD_Controller_new(Kp,Kd,desire_position,desire_pr
     prev_distance_to_dpos = [player_prev_pos(1) - desire_prev_pos(1), player_prev_pos(2) - desire_prev_pos(2)];
 
     % inatialize the speed of the player
-    d_distance_to_ball=prev_distance_to_dpos-distance_to_dpos;
+    d_distance_to_dpos=prev_distance_to_dpos-distance_to_dpos;
     player_acceleration = [0,0];
 
     % caculate player acceleration by PD controller
-    player_acceleration(1) = -Kp * distance_to_dpos(1) - Kd * d_distance_to_ball(1);
-    player_acceleration(2) = -Kp * distance_to_dpos(2) - Kd * d_distance_to_ball(2);  
+    player_acceleration(1) = -Kp * distance_to_dpos(1) - Kd * d_distance_to_dpos(1);
+    player_acceleration(2) = -Kp * distance_to_dpos(2) - Kd * d_distance_to_dpos(2);  
 
     % max acceleration
     max_acceleration = 1;   
