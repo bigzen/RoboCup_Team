@@ -18,5 +18,5 @@ Desire position can be ball position or any position on the field.
 5. attacker.m & defender.m & goal_keeper.m  
 Change every PD controller to the new one.
 
-6. Kickball.m
-Cancel kick ball friction force since there is ball decay in updateGameState.m
+6. Kickball.m  
+Cancel ball friction force since there is ball decay in updateGameState.m
