@@ -8,7 +8,7 @@ ballPosition = ball.position;
 % updatedBall = ball;
 
 %caculate the force with kickBallNoise
-kickBallForce=kickForce + kickBallNoise*normrnd(0.5,0) - 1 + ballFrictionForce;
+kickBallForce=kickForce + kickBallNoise*normrnd(0.5,0) - 1;
 
 % caculate the unit vector with angularNoise
 kickDirection = (targetPosition - ballPosition) / norm(targetPosition - ballPosition);
