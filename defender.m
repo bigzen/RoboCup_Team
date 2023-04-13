@@ -1,11 +1,12 @@
 function [ball_speed, player_acceleration] = defender(ball,players,id)
     %% parametres
-    kp = 20;    % Porpational param
-    kd = 1;     % Differential param
+    kp = 1000;    % Porpational param
+    kd = 100;     % Differential param
     tolerance = 0.45;    %set Controller error tolerance
     dribbleKickForce = 2;               % Kick force for dribbling
     shootKickForce = 7;                 % Kick force for shooting
     defenderKickForce = 7;              % Kick force for defending
+    passballForce = 5;                  % Kick force for passing
     goalThresh = 2;
     
     %% speed of the ball
@@ -34,21 +35,29 @@ function [ball_speed, player_acceleration] = defender(ball,players,id)
     end
     %% caculate the distance and angle
     distToGoal = norm(players(id).pos - goalPosition);         % Distance to goal
+    teamate2DistToGoal = norm(players(teamates(2)).pos - goalPosition);
+    teamate1DistToGoal = norm(players(teamates(3)).pos - goalPosition);
     ballDistToOwnGoal = norm(ball.position - ownGoalPosition);          % Distance between ball and own goal
     distToBall = norm(ball.position - players(id).pos); 
     player_acceleration = [0,0];
 
     %% defender behavior
     if players(id).lastKick == 1       % if ball held
-        if distToGoal < goalThresh
+        if teamate1DistToGoal < distToGoal
             if distToBall > tolerance       % if dis tance to ball > torelance -> move to ball
-                [player_acceleration]=PD_Controller_new(kp,kd,ball.position, ball.prev_pos,players(id).pos, players(id).prev_pos);
+                [player_acceleration]=PD_Controller(kp,kd,ball.position, ball.prev_pos,players(id).pos, players(id).prev_pos);
             else
-                [ball_speed_x,ball_speed_y] = KickBall(ball, shootKickForce, goalPosition);
+                [ball_speed_x,ball_speed_y] = KickBall(ball, passballForce, players(teamates(3)).pos);
+            end
+        elseif teamate2DistToGoal < distToGoal
+            if distToBall > tolerance       % if dis tance to ball > torelance -> move to ball
+                [player_acceleration]=PD_Controller(kp,kd,ball.position, ball.prev_pos,players(id).pos, players(id).prev_pos);
+            else
+                [ball_speed_x,ball_speed_y] = KickBall(ball, passballForce, players(teamates(3)).pos);
             end
         else
             if distToBall > tolerance
-                [player_acceleration]=PD_Controller_new(kp,kd,ball.position, ball.prev_pos,players(id).pos, players(id).prev_pos);
+                [player_acceleration]=PD_Controller(kp,kd,ball.position, ball.prev_pos,players(id).pos, players(id).prev_pos);
             else
                 [ball_speed_x,ball_speed_y] = KickBall(ball, dribbleKickForce, goalPosition);
             end
@@ -56,18 +65,18 @@ function [ball_speed, player_acceleration] = defender(ball,players,id)
 
     elseif players(teamates(1)).lastKick == 1 || players(teamates(2)).lastKick == 1 || players(teamates(3)).lastKick == 1
         desire_position = [4.5 3];
-        [player_acceleration]=PD_Controller_new(kp,kd,desire_position, desire_position,players(id).pos, players(id).prev_pos);
+        [player_acceleration]=PD_Controller(kp,kd,desire_position, desire_position,players(id).pos, players(id).prev_pos);
     else
         if ballDistToOwnGoal > 3
             if distToBall > tolerance       % if distance to ball > torelance -> move to ball
                 desire_position = (ball.position + ownGoalPosition) / 2;      % block goal
-                [player_acceleration]=PD_Controller_new(kp,kd,desire_position, desire_position,players(id).pos, players(id).prev_pos);
+                [player_acceleration]=PD_Controller(kp,kd,desire_position, desire_position,players(id).pos, players(id).prev_pos);
             else
                 [ball_speed_x,ball_speed_y] = KickBall(ball, defenderKickForce, goalPosition);
             end
         else
             if distToBall > tolerance
-                [player_acceleration]=PD_Controller_new(kp,kd,ball.position, ball.prev_pos,players(id).pos, players(id).prev_pos);
+                [player_acceleration]=PD_Controller(kp,kd,ball.position, ball.prev_pos,players(id).pos, players(id).prev_pos);
             else
                 [ball_speed_x,ball_speed_y] = KickBall(ball, defenderKickForce, goalPosition);
             end
@@ -75,5 +84,3 @@ function [ball_speed, player_acceleration] = defender(ball,players,id)
     end
     
     ball_speed=[ball_speed_x,ball_speed_y];
-
-
