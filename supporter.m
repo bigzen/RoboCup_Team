@@ -1,4 +1,4 @@
-function [ball_speed, player_acceleration] = attacker(ball,players,id)
+function [ball_speed, player_acceleration] = supporter(ball,players,id)
     %% parametres
     kp = 1000;    % Porpational param
     kd = 100;     % Differential param
@@ -88,22 +88,17 @@ function [ball_speed, player_acceleration] = attacker(ball,players,id)
             end
         else
             if ball.position(2) < 3
-                desire_position = [(ball.position(1)+goalPosition(1))/2 randi([3,6])];
+                 desire_position = [(ball.position(1)+goalPosition(1))/2 randi([3,6])];
             else
-                desire_position = [(ball.position(1)+goalPosition(1))/2 randi([0,3])];
+                 desire_position = [(ball.position(1)+goalPosition(1))/2 randi([0,3])];
             end
             [player_acceleration]=PD_Controller(kp,kd,desire_position, desire_position,players(id).pos, players(id).prev_pos);
         end
     else
-        if ballDistToOwnGoal > 3
-            if distToBall > tolerance
-                [player_acceleration]=PD_Controller(kp,kd,ball.position, ball.prev_pos,players(id).pos, players(id).prev_pos);
-            else
-                [ball_speed_x,ball_speed_y] = KickBall(ball, dribbleKickForce, goalPosition);
-            end
+        if distToBall > tolerance
+            [player_acceleration]=PD_Controller(kp,kd,ball.position, ball.prev_pos,players(id).pos, players(id).prev_pos);
         else
-            desire_position = [4.5 randi([0,3])];
-            [player_acceleration]=PD_Controller(kp,kd,desire_position, desire_position,players(id).pos, players(id).prev_pos);
+            [ball_speed_x,ball_speed_y] = KickBall(ball, dribbleKickForce, goalPosition);
         end
     end
 

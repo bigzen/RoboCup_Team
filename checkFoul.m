@@ -14,7 +14,7 @@ if ballposition(1) < fieldLimitsX(1) || ballposition(1)>fieldLimitsX(2)
    else
        if ballposition(2) < goalPosts(1,2)&&ballposition(2) > goalPosts(2,2)
            Flag_num = GameFlag.goalScore;
-       elseif players(5).lastKick==1 || players(6).lastKick==1 || players(7).lastKick==1 || players(48).lastKick==1
+       elseif players(5).lastKick==1 || players(6).lastKick==1 || players(7).lastKick==1 || players(8).lastKick==1
            Flag_num = GameFlag.corner;
        else
            Flag_num = GameFlag.goalKick;
