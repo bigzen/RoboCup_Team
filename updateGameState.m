@@ -26,9 +26,10 @@ for id=1:8
 end
 
 %% calculate new player position and speed update the game state
-dt=0.15;
+dt=0.02;
 for id = 1:8
     %player position
+    gameState.players(id).prev_pos = gameState.players(id).pos ;
     player_dis2cov_x = gameState.players(id).vel(1)*dt + (0.5 * update(id).player(1)*(dt^2));
     player_dis2cov_y = gameState.players(id).vel(2)*dt + (0.5 *update(id).player(2)*(dt^2));
     if norm([player_dis2cov_x,player_dis2cov_y])> player_speed_max * dt
@@ -67,6 +68,7 @@ end
 dt=0.15;
 ball_decay=0.94;
 if length(lastKick)==1
+    gameState.ball.prev_pos = gameState.ball.position;
     for id = 1:8
         gameState.players(id).lastKick = -1;
     end
