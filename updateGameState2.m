@@ -1,4 +1,4 @@
-function gameState = updateGameState(gameState)
+function gameState = updateGameState2(gameState)
 %UPDATEGAMESTATE Summary of this function goes here
 %   Detailed explanation goes here
 load("robotSoccerParam.mat",'player_speed_max');
@@ -6,22 +6,21 @@ load("robotSoccerParam.mat",'player_speed_max');
 update = struct('id',[], ...
                  'ball', [],...
                  'player', []);
-for id=1:8
-    if gameState.players(id).role{1}(1)==0
-        [ball_speed, player_acceleration] = goal_keeper(gameState.ball,gameState.players,id);
-        update(id).id=id;
-        update(id).ball=ball_speed;
-        update(id).player=player_acceleration;
-    elseif gameState.players(id).role{1}(1)==1
-        [ball_speed, player_acceleration] = defender(gameState.ball,gameState.players,id);
-        update(id).id=id;
-        update(id).ball=ball_speed;
-        update(id).player=player_acceleration;
-    else
-        [ball_speed, player_acceleration] = attacker(gameState.ball,gameState.players,id);
-        update(id).id=id;
-        update(id).ball=ball_speed;
-        update(id).player=player_acceleration;
+for team=1:2
+    behav = behavior2;
+    behav = behav.setteam(team);
+    id = 8^(team-1);
+    [ball_speed, player_acceleration] = behav.goalKeeper(gameState.ball,gameState.players,id);
+    player_acceleration(isnan(player_acceleration))=0;
+    update(id).id=id;
+    update(id).ball=ball_speed;
+    update(id).player=player_acceleration;
+    [idx, ball_speed, player_acceleration] = behav.othPlayers(gameState.ball,gameState.players);
+    player_acceleration(isnan(player_acceleration))=0;
+    for i = 1:length(idx)
+        update(idx(i)).id=idx(i);
+        update(idx(i)).ball=ball_speed(i,:);
+        update(idx(i)).player=player_acceleration(i,:);
     end
 end
 
@@ -29,7 +28,6 @@ end
 dt=0.02;
 for id = 1:8
     %player position
-    gameState.players(id).prev_pos = gameState.players(id).pos ;
     player_dis2cov_x = gameState.players(id).vel(1)*dt + (0.5 * update(id).player(1)*(dt^2));
     player_dis2cov_y = gameState.players(id).vel(2)*dt + (0.5 *update(id).player(2)*(dt^2));
     if norm([player_dis2cov_x,player_dis2cov_y])> player_speed_max * dt
@@ -65,10 +63,8 @@ for id=1:8
         lastKick = [lastKick, id];
     end
 end
-dt=0.02;
 ball_decay=0.94;
 if length(lastKick)==1
-    gameState.ball.prev_pos = gameState.ball.position;
     for id = 1:8
         gameState.players(id).lastKick = -1;
     end

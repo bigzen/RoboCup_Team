@@ -21,7 +21,7 @@ while(gameState.time<6000)
         %disp('here')
         gameState = initFoulState(gameState,flag);
     else
-        gameState = updateGameState(gameState);
+        gameState = updateGameState2(gameState);
         %gameState.ball.position
     end
     %disp('test_3')
