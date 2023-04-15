@@ -1,4 +1,4 @@
-function gameState = ThrowIn2(gameState,advteam)
+function gameState = ThrowIn(gameState,advteam)
     %% Caculate the ThrowIn ball position
     throwInPos = [0 0];
     if gameState.ball.position(2) > 6
