@@ -6,7 +6,7 @@ function [ball_speed, player_acceleration] = supporter(ball,players,id)
     dribbleKickForce = 2;               % Kick force for dribbling
     shootKickForce = 7;                 % Kick force for shooting
 %     defenderKickForce = 7;              % Kick force for defending
-    passballForce = 5;                  % Kick force for passing
+    passballForce = 7;                  % Kick force for passing
     goalThresh = 2;
     
     %% speed of the ball

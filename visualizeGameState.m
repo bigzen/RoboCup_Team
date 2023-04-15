@@ -8,7 +8,7 @@ function visualizeGameState(gameState)
         figure(idx)
     end
     plotSoccerField(gameState)
-    pause(0.01)
+    pause(0.001)
     %plotPlayers(gameState.time, gameState.players)
     %plotBall(gameState.time, gameState.ball) 
 end
