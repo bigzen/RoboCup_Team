@@ -1,7 +1,7 @@
 function gameState = initFoulState(gameState,flag)
     advteam= Adv_team(gameState,flag);
     if flag == GameFlag.outOfPlay
-        gameState = ThrowIn2(gameState,advteam) ;
+        gameState = ThrowIn(gameState,advteam) ;
     elseif flag == GameFlag.goalKick
         gameState = GoalKick(gameState,advteam) ;
     elseif flag == GameFlag.goalScore
