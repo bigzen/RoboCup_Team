@@ -16,7 +16,7 @@ function gameState = ThrowIn(gameState,advteam)
                 gameState.players(thruplayeridx).pos = [gameState.ball.position(1)+0.45*cosd(45) gameState.ball.position(2)+0.45*sind(45)];
         end
     elseif advteam == 1 
-        thruplayeridx = randsample([5 6 7], 1);
+        thruplayeridx = randsample([6 7 8], 1);
         if (gameState.ball.position(1) > 0 && gameState.ball.position(1) <=1.125) && gameState.ball.position(2) <= 0
             gameState.players(thruplayeridx).pos = [gameState.ball.position(1)-0.45*cosd(45) gameState.ball.position(2)-0.45*sind(45)];
         elseif(gameState.ball.position(1) > 1.125 && gameState.ball.position(1) <=4.5) && gameState.ball.position(2) <= 0
